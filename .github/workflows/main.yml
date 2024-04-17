@@ -18,6 +18,11 @@ jobs:
 
     - name: 'Run checkout'
       uses: actions/checkout@v2
+    
+    - name: 'Run login az'
+      run : |
+          az account set --subscription 66233cb2-4e4f-4316-b4e1-d5e9e53a1960
+          az aks get-credentials --resource-group exo1_group --name exo1 --overwrite-existing
   
     - name: 'Run Azure CLI commands'
       run: |
