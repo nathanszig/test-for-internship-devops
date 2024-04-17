@@ -21,20 +21,11 @@ jobs:
 
     - name: "Determiner la variable en fonction de l'email de l'auteur"
       run: |
-          if[[$(git log -1 --pretty=format:'%ae') == 'nathan.szigeti@edu.devinci.fr']] then
-              threegram = nth
-              echo "THREEGRAM=$threegram" >> GITHUB_ENV
-          fi
-
-    - name: "Echo la variable"
-      run: echo ${{env.THREEGRAM}}
-
-    
-    - name: 'Run login az'
-      run : |
           az account set --subscription 66233cb2-4e4f-4316-b4e1-d5e9e53a1960
           az aks get-credentials --resource-group exo1_group --name exo1 --overwrite-existing
-          kubectl config set-context --current --namespace=workspace-XXX-2000
+          if[[$(git log -1 --pretty=format:'%ae') == 'nathan.szigeti@edu.devinci.fr']] then
+              kubectl config set-context --current --namespace=workspace-nth-2000
+          fi
 
     - name: 'Run docker build'
       run : docker build -t devouf.azurecr.io/nth-hello-world-app .
