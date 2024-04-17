@@ -23,22 +23,17 @@ jobs:
       run : |
           az account set --subscription 66233cb2-4e4f-4316-b4e1-d5e9e53a1960
           az aks get-credentials --resource-group exo1_group --name exo1 --overwrite-existing
-  
-    - name: 'Run Azure CLI commands'
+
+    - name: 'Run docker build'
+      run : docker build -t devouf.azurecr.io/nth-hello-world-app .
+
+    - name: 'Run acr login'
+      run: az acr login --name devouf
+    
+    - name: 'Run docker push'
+      run: docker push devouf.azurecr.io/nth-hello-world-app 
+
+    - name: 'Run kubectl apply'
       run: |
-          docker build -t devouf.azurecr.io/nth-hello-world-app .
-          az acr login --name devouf 
-          docker push devouf.azurecr.io/nth-hello-world-app 
           kubectl apply -f deployment.yaml
           kubectl apply -f service.yaml
-
-
-
-
-
-
-
-
-
-
-
