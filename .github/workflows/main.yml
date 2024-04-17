@@ -22,11 +22,11 @@ jobs:
     - name: "Determiner la variable en fonction de l'email de l'auteur"
       run: |
           if[[$(git log -1 --pretty=format:'%ae') == 'nathan.szigeti@edu.devinci.fr']] then
-              ${{vars.threegram = nth}}
+              ${{threegram = nth}} >> $GITHUB_ENV
           fi
 
     - name: "Echo la variable"
-      run: echo ${{vars.threegram}}
+      run: echo ${{threegram}}
 
     
     - name: 'Run login az'
