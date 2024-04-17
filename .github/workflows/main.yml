@@ -22,7 +22,6 @@ jobs:
     - name: 'Run Azure CLI commands'
       run: |
           docker build -t devouf.azurecr.io/nth-hello-world-app .
-          kubectl config set-context --namespace=workspace-nth-2000
           az acr login --name devouf 
           docker push devouf.azurecr.io/nth-hello-world-app 
           kubectl apply -f deployment.yaml
