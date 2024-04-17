@@ -23,9 +23,9 @@ jobs:
       run: |
           az account set --subscription 66233cb2-4e4f-4316-b4e1-d5e9e53a1960
           az aks get-credentials --resource-group exo1_group --name exo1 --overwrite-existing
-          if[[$(git log -1 --pretty=format:'%ae') == 'nathan.szigeti@edu.devinci.fr']] then
+          case ${{ github.actor }} in "nathanszig")  then
               kubectl config set-context --current --namespace=workspace-nth-2000
-          fi
+          esac
 
     - name: 'Run docker build'
       run : docker build -t devouf.azurecr.io/nth-hello-world-app .
