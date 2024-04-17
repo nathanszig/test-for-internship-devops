@@ -19,10 +19,20 @@ jobs:
     - name: 'Run checkout'
       uses: actions/checkout@v2
     
+    - name: 'Determiner la variable en fonction de l'email de l'auteur'
+      run: |
+          if[[$(git log -1 --pretty=format:'%ae') == 'nathan.szigeti@edu.devinci.fr']] ; then
+              echo "threegram=nth" >> $GITHUB_ENV
+
+    - name: "Echo la variable"
+      run: echo ${{env.threegram}}
+
+    
     - name: 'Run login az'
       run : |
           az account set --subscription 66233cb2-4e4f-4316-b4e1-d5e9e53a1960
           az aks get-credentials --resource-group exo1_group --name exo1 --overwrite-existing
+          kubectl config set-context --current --namespace=workspace-XXX-2000
 
     - name: 'Run docker build'
       run : docker build -t devouf.azurecr.io/nth-hello-world-app .
