@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: githubactions-aks-demo-service
+  name: hello-world-service
 spec:
   selector:
-    app: githubactions-aks-demo
+    app: hello-world
   type: LoadBalancer
   ports:
     - port: 8080
