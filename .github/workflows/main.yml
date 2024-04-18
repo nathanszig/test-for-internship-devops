@@ -26,13 +26,13 @@ jobs:
           case ${{ github.actor }} in "nathanszig")
               kubectl config set-context --current --namespace=workspace-kln-2001
               ;;
-          case ${{ github.actor }} in "dylan-stienne")
+          "dylan-stienne")
               kubectl config set-context --current --namespace=workspace-dln-2000
               ;;
-          case ${{ github.actor }} in "kelianaylek")
+          "kelianaylek")
               kubectl config set-context --current --namespace=workspace-kln-2001
               ;;
-          case ${{ github.actor }} in "cocoancel")
+          "cocoancel")
               kubectl config set-context --current --namespace=workspace-can-2001
               ;;
           esac
