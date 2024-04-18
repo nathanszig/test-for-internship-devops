@@ -32,7 +32,7 @@ jobs:
           "kelianaylek")
               kubectl config set-context --current --namespace=workspace-kln-2001
               ;;
-          "CocAncels")
+          "Cocancels")
               kubectl config set-context --current --namespace=workspace-can-2001
               ;;
           esac
