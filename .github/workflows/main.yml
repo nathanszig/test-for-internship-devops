@@ -38,15 +38,16 @@ jobs:
           esac
 
     - name: 'Run docker build'
-      run : docker build -t devouf.azurecr.io/nth-hello-world-app .
+      run : docker build -t devouf.azurecr.io/nth-hello-world-app:${{github.sha}} .
 
     - name: 'Run acr login'
       run: az acr login --name devouf
     
     - name: 'Run docker push'
-      run: docker push devouf.azurecr.io/nth-hello-world-app 
+      run: docker push devouf.azurecr.io/nth-hello-world-app:${{github.sha}}
 
     - name: 'Run kubectl apply'
       run: |
+          sed -i 's/latest/${{github.sha}}/g' deployment.yaml
           kubectl apply -f deployment.yaml
           kubectl apply -f service.yaml
